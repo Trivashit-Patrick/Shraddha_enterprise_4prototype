@@ -336,7 +336,7 @@ async def create_category(data: CategoryBase, authorization: str = Header(None))
     return {"id": category.id, "name": category.name, "description": category.description, "created_at": doc['created_at']}
 
 @api_router.delete("/categories/{category_id}")
-async def delete_category(category_id: str, authorization: str = None):
+async def delete_category(category_id: str, authorization: str = Header(None)):
     await get_current_admin(authorization)
     result = await db.categories.delete_one({"id": category_id})
     if result.deleted_count == 0:
