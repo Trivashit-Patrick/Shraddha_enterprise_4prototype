@@ -313,8 +313,7 @@ async def login_admin(data: AdminLogin):
     )
 
 @api_router.get("/auth/me")
-async def get_current_admin_info(authorization: str = None):
-    from fastapi import Header
+async def get_current_admin_info(authorization: str = Header(None)):
     admin = await get_current_admin(authorization)
     return admin
 
