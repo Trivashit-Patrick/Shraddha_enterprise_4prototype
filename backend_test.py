@@ -37,7 +37,7 @@ class ShraddhaEnterprisesAPITester:
         test_headers = {'Content-Type': 'application/json'}
         
         if self.token:
-            test_headers['Authorization'] = f'Bearer {self.token}'
+            test_headers['authorization'] = self.token  # Backend expects just the token, not Bearer prefix
         
         if headers:
             test_headers.update(headers)
