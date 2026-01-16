@@ -540,7 +540,7 @@ async def update_product(
     return {"id": product_id, "message": "Product updated successfully"}
 
 @api_router.delete("/products/{product_id}")
-async def delete_product(product_id: str, authorization: str = None):
+async def delete_product(product_id: str, authorization: str = Header(None)):
     await get_current_admin(authorization)
     
     product = await db.products.find_one({"id": product_id})
