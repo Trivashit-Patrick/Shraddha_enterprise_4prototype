@@ -571,7 +571,7 @@ async def create_video(
     category: Optional[str] = Form(None),
     display_order: int = Form(0),
     video: UploadFile = File(...),
-    authorization: str = None
+    authorization: str = Header(None)
 ):
     await get_current_admin(authorization)
     
