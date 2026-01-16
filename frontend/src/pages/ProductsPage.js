@@ -214,18 +214,18 @@ export default function ProductsPage() {
             {/* Active Filters Tags */}
             {hasActiveFilters && (
               <div className="flex flex-wrap gap-2 mb-6">
-                {selectedCategory && (
+                {selectedCategory && selectedCategory !== 'all' && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-secondary rounded-full text-sm">
                     {categories.find(c => c.id === selectedCategory)?.name}
-                    <button onClick={() => setSelectedCategory('')}>
+                    <button onClick={() => setSelectedCategory('all')}>
                       <X className="w-3 h-3" />
                     </button>
                   </span>
                 )}
-                {selectedSubcategory && (
+                {selectedSubcategory && selectedSubcategory !== 'all' && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-secondary rounded-full text-sm">
                     {subcategories.find(s => s.id === selectedSubcategory)?.name}
-                    <button onClick={() => setSelectedSubcategory('')}>
+                    <button onClick={() => setSelectedSubcategory('all')}>
                       <X className="w-3 h-3" />
                     </button>
                   </span>
