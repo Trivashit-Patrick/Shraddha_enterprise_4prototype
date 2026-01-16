@@ -66,8 +66,8 @@ export default function ProductsPage() {
       setLoading(true);
       try {
         const params = {};
-        if (selectedCategory) params.category_id = selectedCategory;
-        if (selectedSubcategory) params.subcategory_id = selectedSubcategory;
+        if (selectedCategory && selectedCategory !== 'all') params.category_id = selectedCategory;
+        if (selectedSubcategory && selectedSubcategory !== 'all') params.subcategory_id = selectedSubcategory;
         
         const res = await apiService.getProducts(params);
         setProducts(res.data);
