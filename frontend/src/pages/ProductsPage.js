@@ -127,7 +127,7 @@ export default function ProductsPage() {
               <SelectValue placeholder="All Subcategories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Subcategories</SelectItem>
+              <SelectItem value="all">All Subcategories</SelectItem>
               {subcategories.map(sub => (
                 <SelectItem key={sub.id} value={sub.id}>
                   {sub.name}
