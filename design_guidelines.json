@@ -1,0 +1,174 @@
+{
+  "project_name": "Shraddha Enterprises Product Showcase",
+  "design_philosophy": {
+    "identity": "E1: The Anti-AI Designer",
+    "core_concept": "Industrial Precision & Unshakable Trust",
+    "archetype": "The Performance Pro (Archetype 2) + Swiss High-Contrast (Archetype 4)",
+    "vibe": "Engineered, Reliable, Heavy-Duty, yet Modern and Clean.",
+    "emotional_goal": "Instill confidence in procurement officers through clarity, speed, and visual weight."
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Manrope, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "usage_rules": {
+      "headings": "Bold (700) or ExtraBold (800). Tight tracking (-0.02em). Use for all H1-H3.",
+      "body": "Regular (400) or Medium (500). Relaxed line-height (1.6).",
+      "captions": "Uppercase, wide tracking (0.1em), small size (text-xs). Use for labels like 'SKU', 'CATEGORY'."
+    },
+    "installation": "Import from Google Fonts: https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;600;700;800&family=JetBrains+Mono&display=swap"
+  },
+  "colors": {
+    "palette_strategy": "Industrial Safety & Deep Reliability",
+    "light_mode": {
+      "background": "#FFFFFF",
+      "foreground": "#0F172A",
+      "primary": "#0F172A",
+      "primary_foreground": "#F8FAFC",
+      "secondary": "#F1F5F9",
+      "secondary_foreground": "#0F172A",
+      "accent": "#F97316",
+      "accent_foreground": "#FFFFFF",
+      "muted": "#F1F5F9",
+      "muted_foreground": "#64748B",
+      "border": "#E2E8F0",
+      "card": "#FFFFFF"
+    },
+    "dark_mode": {
+      "background": "#020617",
+      "foreground": "#F8FAFC",
+      "primary": "#F8FAFC",
+      "primary_foreground": "#020617",
+      "secondary": "#1E293B",
+      "secondary_foreground": "#F8FAFC",
+      "accent": "#F97316",
+      "accent_foreground": "#FFFFFF",
+      "muted": "#1E293B",
+      "muted_foreground": "#94A3B8",
+      "border": "#1E293B",
+      "card": "#020617"
+    },
+    "special_colors": {
+      "safety_orange": "#F97316",
+      "industrial_blue": "#0F172A",
+      "steel_grey": "#64748B",
+      "success_green": "#10B981",
+      "error_red": "#EF4444"
+    }
+  },
+  "layout": {
+    "spacing_system": "Generous. Use p-8, p-12, p-16 for sections. Containers with borders MUST have internal padding (p-6 or p-8).",
+    "grid_systems": {
+      "home_featured": {
+        "name": "The Tetris Grid (Mode A)",
+        "classes": "grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8",
+        "rules": "Mix col-span-8 (Hero), col-span-4 (Square), and col-span-2 (Filler). Never fill 100% perfectly."
+      },
+      "product_catalog": {
+        "name": "High Density Grid (Mode B)",
+        "classes": "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
+        "rules": "Uniform cards. High information density. Clear hierarchy."
+      }
+    },
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+  },
+  "components": {
+    "cards": {
+      "style": "Sharp or Minimal Radius (rounded-md).",
+      "border": "1px solid border-border. No heavy shadows in default state.",
+      "hover": "border-primary/50 shadow-lg transition-all duration-200 -translate-y-1"
+    },
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 rounded-md font-semibold px-6 py-3 shadow-sm",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium px-6 py-3",
+      "outline": "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-md font-semibold px-6 py-3"
+    },
+    "inputs": {
+      "style": "bg-background border-input rounded-md focus:ring-2 focus:ring-accent focus:border-transparent h-12"
+    },
+    "navigation": {
+      "style": "Sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50",
+      "links": "font-medium text-sm uppercase tracking-wide hover:text-accent transition-colors"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Use subtle noise/grain overlay on dark mode backgrounds to prevent banding and add 'materiality'.",
+    "glassmorphism": "Use 'Crystal Glass' for modals and sticky headers: backdrop-blur-xl bg-white/70 (light) or bg-black/60 (dark) with 1px border-white/20.",
+    "borders": "Use 'Tracing Beam' effect for featured product cards (animated gradient border).",
+    "shadows": "Layered shadows. shadow-sm for UI elements, shadow-2xl for floating modals."
+  },
+  "motion": {
+    "philosophy": "Machine Precision. Fast, direct, no bounce.",
+    "transitions": "transition-all duration-200 ease-out",
+    "hover_effects": "Scale up slightly (scale-[1.02]), brighten border.",
+    "page_load": "Staggered fade-in-up for grid items."
+  },
+  "images": {
+    "hero_backgrounds": [
+      {
+        "url": "https://images.unsplash.com/photo-1767294274634-613a3545e36d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwd2FyZWhvdXNlJTIwaW50ZXJpb3IlMjBtb2Rlcm58ZW58MHx8fHwxNzY4NTk5OTMyfDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Modern Industrial Warehouse Interior",
+        "category": "hero"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1631856956334-35db20cb7748?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwyfHxpbmR1c3RyaWFsJTIwd2FyZWhvdXNlJTIwaW50ZXJpb3IlMjBtb2Rlcm58ZW58MHx8fHwxNzY4NTk5OTMyfDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Warehouse Shelves",
+        "category": "hero"
+      }
+    ],
+    "product_placeholders": [
+      {
+        "url": "https://images.unsplash.com/photo-1650246363606-a2402ec42b08?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwdmFsdmVzJTIwYW5kJTIwcHVtcHMlMjBwcm9kdWN0JTIwcGhvdG9ncmFwaHklMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY4NTk5OTQ4fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Industrial Valves",
+        "category": "product"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1516247297293-e08212fef7a8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxpbmR1c3RyaWFsJTIwdmFsdmVzJTIwYW5kJTIwcHVtcHMlMjBwcm9kdWN0JTIwcGhvdG9ncmFwaHklMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY4NTk5OTQ4fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "White Pipe",
+        "category": "product"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1632496498058-a3bb5998a4f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHw0fHxpbmR1c3RyaWFsJTIwdmFsdmVzJTIwYW5kJTIwcHVtcHMlMjBwcm9kdWN0JTIwcGhvdG9ncmFwaHklMjB3aGl0ZSUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzY4NTk5OTQ4fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Industrial Tools",
+        "category": "product"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1738162837369-a2beec3a1d47?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwzfHxpbmR1c3RyaWFsJTIwcG93ZXIlMjB0b29scyUyMHByb2Zlc3Npb25hbCUyMHByb2R1Y3QlMjBzaG90fGVufDB8fHx8MTc2ODU5OTk0OXww&ixlib=rb-4.1.0&q=85",
+        "alt": "Worker Grinding Metal",
+        "category": "action"
+      }
+    ],
+    "textures": [
+      {
+        "url": "https://images.unsplash.com/photo-1590239683804-b9f5725fe77c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwxfHxoZWF2eSUyMG1hY2hpbmVyeSUyMGRldGFpbHMlMjBjbG9zZSUyMHVwfGVufDB8fHx8MTc2ODU5OTkzNXww&ixlib=rb-4.1.0&q=85",
+        "alt": "Metal Texture",
+        "category": "texture"
+      }
+    ]
+  },
+  "universal_guidelines": {
+    "anti_ai_rules": [
+      "NO generic centered layouts. Use asymmetry.",
+      "NO 'Inter' for headings. Use Manrope.",
+      "NO gradients for text unless it's a very subtle shine.",
+      "NO 'AI' emojis (robot, brain, rocket).",
+      "NO transparent backgrounds without blur."
+    ],
+    "accessibility": [
+      "Ensure 4.5:1 contrast ratio for text.",
+      "Interactive elements must have :focus-visible styles.",
+      "All images must have alt text."
+    ],
+    "testing": [
+      "All interactive elements MUST have data-testid attributes (kebab-case)."
+    ],
+    "code_style": {
+      "framework": "React (JS) + Tailwind + Shadcn",
+      "components_path": "/app/frontend/src/components/ui",
+      "export_style": "Named exports for components, Default exports for pages."
+    }
+  },
+  "instructions_to_main_agent": "You are building a high-end industrial product showcase. Use the 'Tetris Grid' for the homepage to show dominance. Use the 'High Density Grid' for the product catalog to show utility. Use the provided image URLs. Do not ask for clarification. Implement the 'Safety Orange' accent color for all primary CTAs. Ensure the Admin Panel is dense and functional, not 'fluffy'."
+}
