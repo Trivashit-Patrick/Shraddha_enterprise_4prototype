@@ -637,7 +637,7 @@ async def get_queries(authorization: str = Header(None)):
     return queries
 
 @api_router.put("/queries/{query_id}/status")
-async def update_query_status(query_id: str, status: str, authorization: str = None):
+async def update_query_status(query_id: str, status: str, authorization: str = Header(None)):
     await get_current_admin(authorization)
     result = await db.queries.update_one({"id": query_id}, {"$set": {"status": status}})
     if result.matched_count == 0:
