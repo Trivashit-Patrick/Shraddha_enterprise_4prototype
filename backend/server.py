@@ -447,7 +447,7 @@ async def create_product(
     subcategory_id: Optional[str] = Form(None),
     is_featured: bool = Form(False),
     images: List[UploadFile] = File(default=[]),
-    authorization: str = None
+    authorization: str = Header(None)
 ):
     await get_current_admin(authorization)
     
