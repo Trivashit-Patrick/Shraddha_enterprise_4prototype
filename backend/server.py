@@ -496,7 +496,7 @@ async def update_product(
     is_featured: bool = Form(False),
     existing_images: str = Form("[]"),  # JSON string of existing image paths to keep
     images: List[UploadFile] = File(default=[]),
-    authorization: str = None
+    authorization: str = Header(None)
 ):
     await get_current_admin(authorization)
     
