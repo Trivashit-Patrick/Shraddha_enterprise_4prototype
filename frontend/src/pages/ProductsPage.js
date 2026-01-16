@@ -51,13 +51,13 @@ export default function ProductsPage() {
   }, []);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory !== 'all') {
       apiService.getSubcategories(selectedCategory)
         .then(res => setSubcategories(res.data))
         .catch(console.error);
     } else {
       setSubcategories([]);
-      setSelectedSubcategory('');
+      setSelectedSubcategory('all');
     }
   }, [selectedCategory]);
 
