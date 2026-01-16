@@ -93,8 +93,8 @@ export default function ProductsPage() {
   });
 
   const clearFilters = () => {
-    setSelectedCategory('');
-    setSelectedSubcategory('');
+    setSelectedCategory('all');
+    setSelectedSubcategory('all');
     setSearchQuery('');
   };
 
