@@ -325,7 +325,7 @@ async def get_categories():
     return categories
 
 @api_router.post("/categories", response_model=dict)
-async def create_category(data: CategoryBase, authorization: str = None):
+async def create_category(data: CategoryBase, authorization: str = Header(None)):
     await get_current_admin(authorization)
     
     category = Category(**data.model_dump())
