@@ -370,7 +370,7 @@ async def create_subcategory(data: SubcategoryBase, authorization: str = Header(
     return {"id": subcategory.id, "name": subcategory.name, "category_id": subcategory.category_id, "description": subcategory.description, "created_at": doc['created_at']}
 
 @api_router.delete("/subcategories/{subcategory_id}")
-async def delete_subcategory(subcategory_id: str, authorization: str = None):
+async def delete_subcategory(subcategory_id: str, authorization: str = Header(None)):
     await get_current_admin(authorization)
     result = await db.subcategories.delete_one({"id": subcategory_id})
     if result.deleted_count == 0:
