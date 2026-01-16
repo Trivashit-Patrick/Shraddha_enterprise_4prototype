@@ -354,7 +354,7 @@ async def get_subcategories(category_id: Optional[str] = None):
     return subcategories
 
 @api_router.post("/subcategories", response_model=dict)
-async def create_subcategory(data: SubcategoryBase, authorization: str = None):
+async def create_subcategory(data: SubcategoryBase, authorization: str = Header(None)):
     await get_current_admin(authorization)
     
     # Verify category exists
