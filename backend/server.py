@@ -598,7 +598,7 @@ async def create_video(
     return {"id": video_id, "message": "Video uploaded successfully"}
 
 @api_router.delete("/videos/{video_id}")
-async def delete_video(video_id: str, authorization: str = None):
+async def delete_video(video_id: str, authorization: str = Header(None)):
     await get_current_admin(authorization)
     
     video = await db.videos.find_one({"id": video_id})
