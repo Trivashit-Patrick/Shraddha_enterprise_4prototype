@@ -631,7 +631,7 @@ async def submit_query(data: QueryBase):
     return {"id": query.id, "message": "Query submitted successfully. We will get back to you shortly."}
 
 @api_router.get("/queries", response_model=List[dict])
-async def get_queries(authorization: str = None):
+async def get_queries(authorization: str = Header(None)):
     await get_current_admin(authorization)
     queries = await db.queries.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
     return queries
