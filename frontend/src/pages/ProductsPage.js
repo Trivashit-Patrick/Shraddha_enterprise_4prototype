@@ -98,7 +98,7 @@ export default function ProductsPage() {
     setSearchQuery('');
   };
 
-  const hasActiveFilters = selectedCategory || selectedSubcategory || searchQuery;
+  const hasActiveFilters = selectedCategory && selectedCategory !== 'all' || selectedSubcategory && selectedSubcategory !== 'all' || searchQuery;
 
   const FilterContent = () => (
     <div className="space-y-6">
