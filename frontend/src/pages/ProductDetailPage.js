@@ -30,6 +30,10 @@ export default function ProductDetailPage() {
     if (id) fetchProduct();
   }, [id]);
 
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [product?.id]);
+
   const getImageUrl = (imagePath) => {
     if (!imagePath) return 'https://via.placeholder.com/800x600?text=No+Image';
     if (imagePath.startsWith('http')) return imagePath;
@@ -146,12 +150,12 @@ export default function ProductDetailPage() {
 
             {/* Thumbnails */}
             {images.length > 1 && (
-              <div className="flex gap-3 overflow-x-auto pb-2">
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
                 {images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImageIndex(index)}
-                    className={`relative w-20 h-20 flex-shrink-0 rounded-md overflow-hidden border-2 transition-colors ${
+                    className={`relative aspect-square w-full rounded-md overflow-hidden border-2 transition-colors ${
                       index === selectedImageIndex
                         ? 'border-accent'
                         : 'border-transparent hover:border-muted-foreground/50'

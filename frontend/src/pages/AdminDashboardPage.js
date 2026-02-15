@@ -782,21 +782,34 @@ export default function AdminDashboardPage() {
 // Product Modal Component
 function ProductModal({ open, onOpenChange, product, categories, subcategories, onSubmit, loading }) {
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
+  const [newImagePreviews, setNewImagePreviews] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
 
   useEffect(() => {
     if (product) {
       setSelectedCategory(product.category_id);
+      setSelectedSubcategory(product.subcategory_id || '');
       setExistingImages(product.images || []);
     } else {
       setSelectedCategory('');
+      setSelectedSubcategory('');
       setExistingImages([]);
     }
     setSelectedImages([]);
   }, [product, open]);
 
   const filteredSubcategories = subcategories.filter(s => s.category_id === selectedCategory);
+
+  useEffect(() => {
+    const previews = selectedImages.map(file => URL.createObjectURL(file));
+    setNewImagePreviews(previews);
+
+    return () => {
+      previews.forEach((preview) => URL.revokeObjectURL(preview));
+    };
+  }, [selectedImages]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -806,7 +819,7 @@ function ProductModal({ open, onOpenChange, product, categories, subcategories, 
     formData.append('name', form.name.value);
     formData.append('category_id', form.category_id.value);
     formData.append('description', form.description.value);
-    formData.append('subcategory_id', form.subcategory_id?.value || '');
+    formData.append('subcategory_id', selectedSubcategory || '');
     formData.append('is_featured', form.is_featured.checked);
     formData.append('existing_images', JSON.stringify(existingImages));
     
@@ -820,6 +833,10 @@ function ProductModal({ open, onOpenChange, product, categories, subcategories, 
 
   const removeExistingImage = (index) => {
     setExistingImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const removeNewImage = (index) => {
+    setSelectedImages(prev => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -851,7 +868,10 @@ function ProductModal({ open, onOpenChange, product, categories, subcategories, 
                 name="category_id" 
                 required 
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value);
+                  setSelectedSubcategory('');
+                }}
                 className="w-full h-10 px-3 rounded-md border border-input bg-background"
                 data-testid="product-category-select"
               >
@@ -866,7 +886,8 @@ function ProductModal({ open, onOpenChange, product, categories, subcategories, 
               <select 
                 id="prod-subcat" 
                 name="subcategory_id"
-                defaultValue={product?.subcategory_id || ''}
+                value={selectedSubcategory}
+                onChange={(e) => setSelectedSubcategory(e.target.value)}
                 className="w-full h-10 px-3 rounded-md border border-input bg-background"
                 data-testid="product-subcategory-select"
               >
@@ -906,6 +927,27 @@ function ProductModal({ open, onOpenChange, product, categories, subcategories, 
                     <button
                       type="button"
                       onClick={() => removeExistingImage(index)}
+                      className="absolute -top-2 -right-2 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center text-xs"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {selectedImages.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {newImagePreviews.map((preview, index) => (
+                  <div key={preview} className="relative">
+                    <img
+                      src={preview}
+                      alt={`New upload ${index + 1}`}
+                      className="w-20 h-20 object-cover rounded border border-accent/40"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeNewImage(index)}
                       className="absolute -top-2 -right-2 w-5 h-5 bg-destructive text-white rounded-full flex items-center justify-center text-xs"
                     >
                       ×
