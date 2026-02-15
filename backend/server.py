@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File, Form, status, Header
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File, Form, status, Header, Request
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -67,7 +67,7 @@ class ProductBase(BaseModel):
     category_id: str
     subcategory_id: Optional[str] = None
     description: str
-    images: List[str] = []  # List of relative paths
+    images: List[str] = Field(default_factory=list)  # List of relative paths
     is_featured: bool = False
 
 class Product(ProductBase):
@@ -81,7 +81,7 @@ class ProductResponse(BaseModel):
     category_id: str
     subcategory_id: Optional[str] = None
     description: str
-    images: List[str] = []
+    images: List[str] = Field(default_factory=list)
     is_featured: bool = False
     category_name: Optional[str] = None
     subcategory_name: Optional[str] = None
@@ -441,12 +441,14 @@ async def get_product(product_id: str):
 
 @api_router.post("/products", response_model=dict)
 async def create_product(
+    request: Request,
     name: str = Form(...),
     category_id: str = Form(...),
     description: str = Form(...),
     subcategory_id: Optional[str] = Form(None),
     is_featured: bool = Form(False),
     images: List[UploadFile] = File(default=[]),
+    images_bracket: List[UploadFile] = File(default=[], alias="images[]"),
     authorization: str = Header(None)
 ):
     await get_current_admin(authorization)
@@ -458,9 +460,18 @@ async def create_product(
     
     product_id = str(uuid.uuid4())
     image_paths = []
-    
+
+    # Accept repeated multipart keys for both `images` and `images[]`
+    uploaded_images = [file for file in (images + images_bracket) if getattr(file, "filename", None)]
+
+    # Handle clients sending dynamic image keys like `images[0]`, `images[1]`, etc.
+    form_data = await request.form()
+    for key, value in form_data.multi_items():
+        if key.startswith("images[") and isinstance(value, UploadFile) and value.filename:
+            uploaded_images.append(value)
+
     # Save uploaded images
-    for i, image in enumerate(images):
+    for i, image in enumerate(uploaded_images):
         if image.filename:
             ext = Path(image.filename).suffix
             filename = f"{product_id}_{i}{ext}"
@@ -488,6 +499,7 @@ async def create_product(
 
 @api_router.put("/products/{product_id}", response_model=dict)
 async def update_product(
+    request: Request,
     product_id: str,
     name: str = Form(...),
     category_id: str = Form(...),
@@ -496,6 +508,7 @@ async def update_product(
     is_featured: bool = Form(False),
     existing_images: str = Form("[]"),  # JSON string of existing image paths to keep
     images: List[UploadFile] = File(default=[]),
+    images_bracket: List[UploadFile] = File(default=[], alias="images[]"),
     authorization: str = Header(None)
 ):
     await get_current_admin(authorization)
@@ -514,7 +527,14 @@ async def update_product(
     
     # Save new uploaded images
     new_image_paths = []
-    for i, image in enumerate(images):
+    uploaded_images = [file for file in (images + images_bracket) if getattr(file, "filename", None)]
+
+    form_data = await request.form()
+    for key, value in form_data.multi_items():
+        if key.startswith("images[") and isinstance(value, UploadFile) and value.filename:
+            uploaded_images.append(value)
+
+    for i, image in enumerate(uploaded_images):
         if image.filename:
             ext = Path(image.filename).suffix
             filename = f"{product_id}_{datetime.now().timestamp()}_{i}{ext}"
